@@ -1,3 +1,5 @@
+# there are two codes in this file 1st one is default code 2nd one is modified by dheeraj, use any- "one" of them.
+
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 import numpy as np
@@ -50,5 +52,31 @@ if __name__=='__main__':
     dict2=process("C:/Users/BSC_IT1/Desktop/text_2.txt")
     print("Similarity between two text documents",getSimilarity(dict1,dict2))
 
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+    
+    
+# 2nd version-
+from nltk.corpus import stopwords
+from nltk.tokenize import word_tokenize
+import numpy as np
+import nltk
+nltk.download('punkt')
+nltk.download('stopwords')
+def process(file):
+    raw = open(file).read()
+    tokens = word_tokenize(raw)
+    words = [w.lower() for w in tokens]
+    Stemmed_tokens = [nltk.PorterStemmer().stem(t) for t in words]
+    return {w: Stemmed_tokens.count(w) for w in set(Stemmed_tokens) if not w in stopwords.words()}
+def cos_sim(a,b):
+    return np.dot(a,b) / (np.linalg.norm(a) * np.linalg.norm(b))
+def getSimilarity(dict1, dict2):
+    words = set(dict1.keys()).union(set(dict2.keys()))
+    v1, v2 = np.array([dict1.get(w, 0) for w in words]), np.array([dict2.get(w, 0) for w in words])
+    return cos_sim(v1, v2)
+if _name_ == '_main_':
+    dict1 = process('text1.txt')
+    dict2 = process('text2.txt')
+    print(f'Similarity between two text documents: {getSimilarity(dict1, dict2):.2f}')
 
