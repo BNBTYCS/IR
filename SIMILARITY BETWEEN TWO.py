@@ -57,10 +57,6 @@ if __name__=='__main__':
     
     
 # 2nd version-
-from nltk.corpus import stopwords
-from nltk.tokenize import word_tokenize
-import numpy as np
-import nltk
 nltk.download('punkt')
 nltk.download('stopwords')
 def process(file):
@@ -75,8 +71,7 @@ def getSimilarity(dict1, dict2):
     words = set(dict1.keys()).union(set(dict2.keys()))
     v1, v2 = np.array([dict1.get(w, 0) for w in words]), np.array([dict2.get(w, 0) for w in words])
     return cos_sim(v1, v2)
-if _name_ == '_main_':
+if __name__ == '__main__':
     dict1 = process('text1.txt')
     dict2 = process('text2.txt')
-    print(f'Similarity between two text documents: {getSimilarity(dict1, dict2):.2f}')
-
+    print(f'Similarity between two text documents: {getSimilarity(dict1,dict2):.2f}')
