@@ -74,4 +74,4 @@ def getSimilarity(dict1, dict2):
 if __name__ == '__main__':
     dict1 = process('text1.txt')
     dict2 = process('text2.txt')
-    print(f'Similarity between two text documents: {getSimilarity(dict1,dict2):.2f}')
+    print('Similarity between two text documents:',getSimilarity(dict1,dict2))
